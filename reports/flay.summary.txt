@@ -1,3 +1,9 @@
-Total score (lower is better) = 78
+Total score (lower is better) = 566
 
-   78.00: app/controllers/clientes_controller.rb
+  122.00: app/controllers/clientes_controller.rb
+  122.00: app/controllers/produtos_controller.rb
+  117.00: test/controllers/produtos_controller_test.rb
+  117.00: test/controllers/clientes_controller_test.rb
+   52.00: db/schema.rb
+   18.00: db/migrate/20150417133528_create_produtos.rb
+   18.00: db/migrate/20150416204637_create_clientes.rb

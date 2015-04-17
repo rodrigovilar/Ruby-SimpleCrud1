@@ -1,22 +1,171 @@
-Total score (lower is better) = 78
+Total score (lower is better) = 566
 
-1) Similar code found in :block (mass = 42)
-  A: app/controllers/clientes_controller.rb:31
-  B: app/controllers/clientes_controller.rb:45
+1) Similar code found in :class (mass = 234)
+  A: test/controllers/clientes_controller_test.rb:3
+  B: test/controllers/produtos_controller_test.rb:3
 
-   format.html do
-A:   redirect_to(@cliente, :notice => "Cliente was successfully created.")
-B:   redirect_to(@cliente, :notice => "Cliente was successfully updated.")
+A: class ClientesControllerTest < ActionController::TestCase
+B: class ProdutosControllerTest < ActionController::TestCase
+A:   setup { @cliente = clientes(:one) }
+B:   setup { @produto = produtos(:one) }
+     
+     test("should get index") do
+       get(:index)
+       assert_response(:success)
+A:     assert_not_nil(assigns(:clientes))
+B:     assert_not_nil(assigns(:produtos))
+     end
+     
+     test("should get new") do
+       get(:new)
+       assert_response(:success)
+     end
+     
+A:   test("should create cliente") do
+B:   test("should create produto") do
+A:     assert_difference("Cliente.count") do
+B:     assert_difference("Produto.count") do
+A:       post(:create, :cliente => ({ :idade => @cliente.idade, :nome => @cliente.nome }))
+B:       post(:create, :produto => ({ :nome => @produto.nome, :quantidade => @produto.quantidade }))
+       end
+A:     assert_redirected_to(cliente_path(assigns(:cliente)))
+B:     assert_redirected_to(produto_path(assigns(:produto)))
+     end
+     
+A:   test("should show cliente") do
+B:   test("should show produto") do
+A:     get(:show, :id => (@cliente))
+B:     get(:show, :id => (@produto))
+       assert_response(:success)
+     end
+     
+     test("should get edit") do
+A:     get(:edit, :id => (@cliente))
+B:     get(:edit, :id => (@produto))
+       assert_response(:success)
+     end
+     
+A:   test("should update cliente") do
+B:   test("should update produto") do
+A:     patch(:update, :id => (@cliente), :cliente => ({ :idade => @cliente.idade, :nome => @cliente.nome }))
+B:     patch(:update, :id => (@produto), :produto => ({ :nome => @produto.nome, :quantidade => @produto.quantidade }))
+A:     assert_redirected_to(cliente_path(assigns(:cliente)))
+B:     assert_redirected_to(produto_path(assigns(:produto)))
+     end
+     
+A:   test("should destroy cliente") do
+B:   test("should destroy produto") do
+A:     assert_difference("Cliente.count", -1) do
+B:     assert_difference("Produto.count", -1) do
+A:       delete(:destroy, :id => (@cliente))
+B:       delete(:destroy, :id => (@produto))
+       end
+A:     assert_redirected_to(clientes_path)
+B:     assert_redirected_to(produtos_path)
+     end
    end
-A: format.json { render(:show, :status => :created, :location => (@cliente)) }
-B: format.json { render(:show, :status => :ok, :location => (@cliente)) }
 
-2) Similar code found in :block (mass = 36)
-  A: app/controllers/clientes_controller.rb:34
-  B: app/controllers/clientes_controller.rb:48
+2) Similar code found in :defn (mass = 102)
+  A: app/controllers/clientes_controller.rb:26
+  B: app/controllers/produtos_controller.rb:26
 
-A: format.html { render(:new) }
-B: format.html { render(:edit) }
-   format.json do
-     render(:json => @cliente.errors, :status => :unprocessable_entity)
+A: # POST /produtos
+B: # POST /clientes
+A: # POST /produtos.json
+B: # POST /clientes.json
+   def create
+A:   @produto = Produto.new(produto_params)
+B:   @cliente = Cliente.new(cliente_params)
+     respond_to do |format|
+A:     if @produto.save then
+B:     if @cliente.save then
+         format.html do
+A:         redirect_to(@produto, :notice => "Produto was successfully created.")
+B:         redirect_to(@cliente, :notice => "Cliente was successfully created.")
+         end
+A:       format.json { render(:show, :status => :created, :location => (@produto)) }
+B:       format.json { render(:show, :status => :created, :location => (@cliente)) }
+       else
+         format.html { render(:new) }
+         format.json do
+A:         render(:json => @produto.errors, :status => :unprocessable_entity)
+B:         render(:json => @cliente.errors, :status => :unprocessable_entity)
+         end
+       end
+     end
+   end
+
+3) Similar code found in :defn (mass = 96)
+  A: app/controllers/clientes_controller.rb:42
+  B: app/controllers/produtos_controller.rb:42
+
+A: # PATCH/PUT /produtos/1
+B: # PATCH/PUT /clientes/1
+A: # PATCH/PUT /produtos/1.json
+B: # PATCH/PUT /clientes/1.json
+   def update
+     respond_to do |format|
+A:     if @produto.update(produto_params) then
+B:     if @cliente.update(cliente_params) then
+         format.html do
+A:         redirect_to(@produto, :notice => "Produto was successfully updated.")
+B:         redirect_to(@cliente, :notice => "Cliente was successfully updated.")
+         end
+A:       format.json { render(:show, :status => :ok, :location => (@produto)) }
+B:       format.json { render(:show, :status => :ok, :location => (@cliente)) }
+       else
+         format.html { render(:edit) }
+         format.json do
+A:         render(:json => @produto.errors, :status => :unprocessable_entity)
+B:         render(:json => @cliente.errors, :status => :unprocessable_entity)
+         end
+       end
+     end
+   end
+
+4) Similar code found in :iter (mass = 52)
+  A: db/schema.rb:16
+  B: db/schema.rb:23
+
+A: create_table("clientes", :force => :cascade) do |t|
+B: create_table("produtos", :force => :cascade) do |t|
+     t.string("nome")
+A:   t.integer("idade")
+B:   t.integer("quantidade")
+     t.datetime("created_at", :null => false)
+     t.datetime("updated_at", :null => false)
+   end
+
+5) Similar code found in :defn (mass = 46)
+  A: app/controllers/clientes_controller.rb:56
+  B: app/controllers/produtos_controller.rb:56
+
+A: # DELETE /produtos/1
+B: # DELETE /clientes/1
+A: # DELETE /produtos/1.json
+B: # DELETE /clientes/1.json
+   def destroy
+A:   @produto.destroy
+B:   @cliente.destroy
+     respond_to do |format|
+       format.html do
+A:       redirect_to(produtos_url, :notice => "Produto was successfully destroyed.")
+B:       redirect_to(clientes_url, :notice => "Cliente was successfully destroyed.")
+       end
+       format.json { head(:no_content) }
+     end
+   end
+
+6) Similar code found in :defn (mass = 36)
+  A: db/migrate/20150416204637_create_clientes.rb:2
+  B: db/migrate/20150417133528_create_produtos.rb:2
+
+   def change
+A:   create_table(:clientes) do |t|
+B:   create_table(:produtos) do |t|
+       t.string(:nome)
+A:     t.integer(:idade)
+B:     t.integer(:quantidade)
+       t.timestamps(:null => false)
+     end
    end

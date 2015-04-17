@@ -3,5 +3,5 @@ Copyright (c) 2003-08 RedHill Consulting Pty. Ltd.  All rights reserved.
 Simian is not free unless used solely for non-commercial or evaluation purposes.
 {failOnDuplication=true, ignoreCharacterCase=true, ignoreCurlyBraces=true, ignoreIdentifierCase=true, ignoreModifiers=true, ignoreStringCase=true, threshold=6}
 Found 0 duplicate lines in 0 blocks in 0 files
-Processed a total of 132 significant (533 raw) lines in 26 files
-Processing time: 0.051sec
+Processed a total of 207 significant (691 raw) lines in 32 files
+Processing time: 0.068sec
