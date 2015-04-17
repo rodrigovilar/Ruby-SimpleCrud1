@@ -1,0 +1,22 @@
+Total score (lower is better) = 78
+
+1) Similar code found in :block (mass = 42)
+  A: app/controllers/clientes_controller.rb:31
+  B: app/controllers/clientes_controller.rb:45
+
+   format.html do
+A:   redirect_to(@cliente, :notice => "Cliente was successfully created.")
+B:   redirect_to(@cliente, :notice => "Cliente was successfully updated.")
+   end
+A: format.json { render(:show, :status => :created, :location => (@cliente)) }
+B: format.json { render(:show, :status => :ok, :location => (@cliente)) }
+
+2) Similar code found in :block (mass = 36)
+  A: app/controllers/clientes_controller.rb:34
+  B: app/controllers/clientes_controller.rb:48
+
+A: format.html { render(:new) }
+B: format.html { render(:edit) }
+   format.json do
+     render(:json => @cliente.errors, :status => :unprocessable_entity)
+   end
