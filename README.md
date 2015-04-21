@@ -7,7 +7,10 @@ sudo gem install flay
 
 sudo gem install ruby2ruby
 
+sudo gem install flay-actionpack
+
 find . -name \*.rb | xargs flay -d
+find . -name \*.erb | xargs flay -d
 
 
 To install and run Simian:
